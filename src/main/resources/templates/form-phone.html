@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Thêm mới Điện thoại</title></head>
+<body>
+<h1>Thêm mới Điện thoại</h1>
+
+<form th:action="@{/save}" th:object="${phone}" method="post" enctype="multipart/form-data">
+
+    <div>
+        <label>Mã ĐT:</label>
+        <input type="text" th:field="*{maDT}" />
+        <span th:if="${#fields.hasErrors('maDT')}" th:errors="*{maDT}"></span>
+    </div>
+    <div>
+        <label>Tên ĐT:</label>
+        <input type="text" th:field="*{tenDT}" />
+        <span th:if="${#fields.hasErrors('tenDT')}" th:errors="*{tenDT}"></span>
+    </div>
+    <div>
+        <label>Năm SX:</label>
+        <input type="text" th:field="*{namSanXuat}" />
+        <span th:if="${#fields.hasErrors('namSanXuat')}" th:errors="*{namSanXuat}"></span>
+    </div>
+    <div>
+        <label>Nhà Cung Cấp:</label>
+        <select th:field="*{nhaCungCap}">
+            <option value="">-- Chọn NCC --</option>
+            <option th:each="ncc : ${suppliers}"
+                    th:value="${ncc.maNCC}"
+                    th:text="${ncc.tenNhaCC}"></option>
+        </select>
+    </div>
+    <div>
+        <label>Hình Ảnh:</label>
+        <input type="file" name="fileHinhAnh" />
+    </div>
+
+    <button type="submit">Thêm</button>
+</form>
+</body>
+</html>

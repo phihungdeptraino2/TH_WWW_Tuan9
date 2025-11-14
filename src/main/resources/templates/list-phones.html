@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Danh sách điện thoại</title></head>
+<body>
+<h1>Danh sách sản phẩm</h1>
+<a th:href="@{/new}">Thêm mới sản phẩm</a>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Tên Điện Thoại</th>
+        <th>Năm SX</th>
+        <th>Nhà Cung Cấp</th>
+        <th>Hình Ảnh</th>
+        <th>Hành Động</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="phone : ${phones}">
+        <td th:text="${phone.tenDT}">Tên ĐT</td>
+        <td th:text="${phone.namSanXuat}">2025</td>
+        <td th:text="${phone.nhaCungCap != null ? phone.nhaCungCap.tenNhaCC : 'N/A'}">NCC</td>
+        <td>
+            <img th:if="${phone.hinhAnh != null}"
+                 th:src="@{/uploads/{imgName}(imgName=${phone.hinhAnh})}"
+                 width="100" />
+        </td>
+        <td>
+            <a th:href="@{/delete/{maDT}(maDT=${phone.maDT})}">Xóa</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
